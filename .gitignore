@@ -1,9 +1,9 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
 /.pnp
 .pnp.*
+
+# Yarn (keep if used later)
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
@@ -24,18 +24,32 @@
 .DS_Store
 *.pem
 
-# debug
+# logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
+pnpm-debug.log*
+*.log
 
-# env files (can opt-in for committing if needed)
+# environment files
 .env*
 
-# vercel
+# local tooling
 .vercel
+.turbo/
+.swc/
 
-# typescript
+# editor settings
+.vscode/
+.idea/
+
+# TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# local AI/dev memory files
+AGENTS.md
+CLAUDE.md
+
+package-lock.json
+yarn.lock

@@ -14,7 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Industrial Automation | Smart Factory Solutions",
-  description: "Modern industrial automation website built with Next.js for smart factories and process control.",
+  description:
+    "Modern industrial automation website built with Next.js for smart factories and process control.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -23,7 +24,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body
+        suppressHydrationWarning
+        suppressContentEditableWarning
+        className="min-h-full flex flex-col"
+      >
+        {children}
+      </body>
     </html>
   );
 }

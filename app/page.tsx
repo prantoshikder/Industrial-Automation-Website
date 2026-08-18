@@ -1,19 +1,35 @@
-import Header from "@/components/Header/Header";
-import Hero from "@/components/Hero/Hero";
-import Solutions from "@/components/Solutions/Solutions";
-import Capabilities from "@/components/Capabilities/Capabilities";
-import Process from "@/components/Process/Process";
-import Contact from "@/components/Contact/Contact";
+import About from "@/components/About";
+import CTA from "@/components/CTA";
+import CaseStudies from "@/components/CaseStudies";
+import Features from "@/components/Features";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import Process from "@/components/Process";
+import Solutions from "@/components/Solutions";
+import Stats from "@/components/Stats";
+import Testimonials from "@/components/Testimonials";
+import TrustedBy from "@/components/TrustedBy";
+import WhyChoose from "@/components/WhyChoose";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-950 text-white">
+    <>
       <Header />
-      <Hero />
-      <Solutions />
-      <Capabilities />
-      <Process />
-      <Contact />
-    </main>
+      <main>
+        <Hero />
+        <TrustedBy />
+        <Features />
+        <About />
+        <Solutions />
+        <WhyChoose />
+        <Process />
+        <Stats />
+        <CaseStudies />
+        <Testimonials />
+        <CTA />
+      </main>
+      <Footer />
+    </>
   );
 }

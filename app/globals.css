@@ -1,15 +1,19 @@
 @import "tailwindcss";
 
-:root {
-  --background: #020817;
-  --foreground: #f8fafc;
-}
+@theme {
+  --color-brand: #0f7a6b;
+  --color-brand-dark: #0a5b50;
+  --color-brand-soft: #e7f4f1;
+  --color-accent: #3fd68c;
+  --color-teal-ink: #12a08c;
+  --color-ink: #0d1b24;
+  --color-body: #61707a;
+  --color-line: #e6ecec;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f5f9f9;
+  --color-footer: #0e1a20;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 }
 
 html {
@@ -17,17 +21,21 @@ html {
 }
 
 body {
-  background:
-    radial-gradient(circle at top, rgba(34, 211, 238, 0.15), transparent 30%),
-    var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-* {
-  box-sizing: border-box;
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
   text-decoration: none;
+}
+
+/* Horizontal snap rail used by the case-studies carousel */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

@@ -1,45 +1,65 @@
-const solutions = [
+import Container from "../shared/Container";
+import Icon, { type IconName } from "../ui/Icon";
+import SectionHeading from "../ui/SectionHeading";
+
+const services: { icon: IconName; title: string; description: string }[] = [
   {
-    icon: "🤖",
+    icon: "robot",
     title: "Robotic Automation",
-    text: "High-performance robotic systems for repetitive, precision, and hazardous tasks.",
+    description: "High-performance robotic systems",
   },
   {
-    icon: "🔗",
+    icon: "network",
     title: "System Integration",
-    text: "Seamless integration with existing systems, equipment, and workflows.",
+    description: "Seamless integration for maximum efficiency",
   },
   {
-    icon: "⚙️",
+    icon: "cog",
     title: "Smart Manufacturing",
-    text: "Data-driven solutions for intelligent production management.",
+    description: "Data-driven solutions for intelligent factories",
   },
   {
-    icon: "🛠️",
+    icon: "wrench",
     title: "Maintenance & Support",
-    text: "Reliable support for continuous operations and system optimization.",
+    description: "Reliable support for continuous operations",
   },
 ];
 
 export default function Solutions() {
   return (
-    <section id="solutions" className="mx-auto max-w-6xl px-6 py-20 lg:px-10">
-      <div className="mb-12 max-w-2xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-300">OUR SOLUTIONS</p>
-        <h2 className="mt-4 text-3xl font-bold text-white md:text-4xl">Comprehensive Automation Services Designed For Your Success</h2>
-      </div>
+    <section id="solutions" className="bg-surface-alt py-20">
+      <Container>
+        <SectionHeading
+          align="center"
+          eyebrow="Our Solutions"
+          title={
+            <>
+              Comprehensive Automation Services
+              <br className="hidden sm:block" /> Designed For Your{" "}
+              <span className="text-teal-ink">Success</span>
+            </>
+          }
+        />
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {solutions.map((item) => (
-          <div key={item.title} className="rounded-3xl border border-slate-800 bg-slate-900/80 p-6 transition hover:-translate-y-1 hover:border-cyan-400/50">
-            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-500/15 text-xl text-cyan-300 ring-1 ring-cyan-400/30">
-              {item.icon}
-            </div>
-            <h3 className="text-xl font-semibold text-white">{item.title}</h3>
-            <p className="mt-3 text-base leading-7 text-slate-300">{item.text}</p>
-          </div>
-        ))}
-      </div>
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {services.map((service) => (
+            <article
+              key={service.title}
+              className="rounded-2xl border border-line bg-white p-6 transition-shadow hover:shadow-lg hover:shadow-ink/5"
+            >
+              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-soft text-brand">
+                <Icon name={service.icon} size={24} />
+              </span>
+              <h3 className="mt-6 text-base font-bold text-ink">
+                {service.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-body">
+                {service.description}
+              </p>
+            </article>
+          ))}
+        </div>
+      </Container>
     </section>
   );
 }

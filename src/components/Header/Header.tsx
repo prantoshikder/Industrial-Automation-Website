@@ -1,49 +1,142 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import Container from "../shared/Container";
+import Icon from "../ui/Icon";
+import Logo from "../ui/Logo";
+
+type NavItem = {
+  label: string;
+  href: string;
+  children?: { label: string; href: string }[];
+};
+
+const nav: NavItem[] = [
+  { label: "Home", href: "#home" },
+  {
+    label: "Services",
+    href: "#solutions",
+    children: [
+      { label: "Robotic Automation", href: "#solutions" },
+      { label: "System Integration", href: "#solutions" },
+      { label: "Smart Manufacturing", href: "#solutions" },
+      { label: "Maintenance & Support", href: "#solutions" },
+    ],
+  },
+  {
+    label: "Solutions",
+    href: "#solutions",
+    children: [
+      { label: "Automotive", href: "#case-studies" },
+      { label: "Electronics", href: "#case-studies" },
+      { label: "Packaging & Logistics", href: "#case-studies" },
+    ],
+  },
+  { label: "Case Studies", href: "#case-studies" },
+  {
+    label: "Resources",
+    href: "#process",
+    children: [
+      { label: "Blog", href: "#process" },
+      { label: "Whitepapers", href: "#process" },
+      { label: "Downloads", href: "#process" },
+    ],
+  },
+  { label: "About", href: "#about" },
+];
+
 export default function Header() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
-    <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6 lg:px-10">
-      <div className="flex items-center gap-3">
-        <svg
-          className="h-10 w-10"
-          viewBox="0 0 48 48"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect width="48" height="48" rx="8" fill="#0E7490" fillOpacity="0.2" />
-          <path
-            d="M12 20V28C12 30.2091 13.7909 32 16 32H32C34.2091 32 36 30.2091 36 28V20"
-            stroke="#06B6D4"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M16 20V16C16 14.8954 16.8954 14 18 14H30C31.1046 14 32 14.8954 32 16V20"
-            stroke="#06B6D4"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <circle cx="20" cy="26" r="1.5" fill="#06B6D4" />
-          <circle cx="28" cy="26" r="1.5" fill="#06B6D4" />
-        </svg>
-        <div>
-          <p className="text-lg font-semibold tracking-wide">Anti</p>
+    <header className="sticky top-0 z-50 border-b border-line/70 bg-white/95 backdrop-blur">
+      <Container className="flex h-20 items-center justify-between">
+        <Link href="#home" aria-label="Automa home">
+          <Logo />
+        </Link>
+
+        <nav className="hidden items-center gap-7 lg:flex">
+          {nav.map((item) => (
+            <div key={item.label} className="group relative">
+              <Link
+                href={item.href}
+                className="flex items-center gap-1 py-6 text-sm font-medium text-body transition-colors hover:text-brand"
+              >
+                {item.label}
+                {item.children ? <Icon name="chevronDown" size={15} /> : null}
+              </Link>
+
+              {item.children ? (
+                <div className="invisible absolute left-0 top-full w-56 translate-y-1 rounded-2xl border border-line bg-white p-2 opacity-0 shadow-lg shadow-ink/5 transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                  {item.children.map((child) => (
+                    <Link
+                      key={child.label}
+                      href={child.href}
+                      className="block rounded-xl px-3 py-2 text-sm text-body transition-colors hover:bg-brand-soft hover:text-brand"
+                    >
+                      {child.label}
+                    </Link>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            aria-label="Notifications"
+            className="hidden h-10 w-10 items-center justify-center rounded-full border border-line text-body transition-colors hover:border-brand hover:text-brand sm:flex"
+          >
+            <Icon name="bell" size={18} />
+          </button>
+
+          <Link
+            href="#contact"
+            className="hidden rounded-full bg-brand px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-dark sm:inline-flex"
+          >
+            Get Started
+          </Link>
+
+          <button
+            type="button"
+            onClick={() => setMobileOpen((open) => !open)}
+            aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink lg:hidden"
+          >
+            <Icon name={mobileOpen ? "close" : "menu"} size={20} />
+          </button>
         </div>
-      </div>
+      </Container>
 
-      <nav className="hidden items-center gap-8 text-sm text-slate-300 md:flex">
-        <a href="#solutions" className="transition hover:text-white">Solutions</a>
-        <a href="#capabilities" className="transition hover:text-white">Capabilities</a>
-        <a href="#process" className="transition hover:text-white">Process</a>
-        <a href="#contact" className="transition hover:text-white">Contact</a>
-      </nav>
-
-      <a
-        href="#contact"
-        className="rounded-full border border-cyan-400/40 bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-200 transition hover:bg-cyan-500/20"
-      >
-        Book a Demo
-      </a>
+      {mobileOpen ? (
+        <div className="border-t border-line bg-white lg:hidden">
+          <Container className="py-4">
+            <nav className="flex flex-col">
+              {nav.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="border-b border-line/70 py-3 text-sm font-medium text-body last:border-0 hover:text-brand"
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <Link
+                href="#contact"
+                onClick={() => setMobileOpen(false)}
+                className="mt-4 rounded-full bg-brand px-6 py-3 text-center text-sm font-semibold text-white"
+              >
+                Get Started
+              </Link>
+            </nav>
+          </Container>
+        </div>
+      ) : null}
     </header>
   );
 }

@@ -53,3 +53,4 @@ CLAUDE.md
 
 package-lock.json
 yarn.lock
+.claude
